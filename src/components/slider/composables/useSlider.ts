@@ -3,64 +3,64 @@ import type { TRangeValues, IUseSliderReturn, ISliderWrapperDimensions, TTrigger
 import { TOTAL_SLIDER_PERCENTAGE } from "../constants"
 import { getFillPercentage, triggerEvents, calculateStepsCompleted, getMinAndMax, getStepsCompleted } from "../helpers"
 
-export function useSlider(sliderValue: ModelRef<number | TRangeValues>, stepPercentage: number, isVerticalSlider: boolean, direction: string, leftKnob: Ref<HTMLElement>, rightKnob: Ref<HTMLElement>, range: boolean, strict: boolean, moveFrom: Ref<string>): IUseSliderReturn{
+export function useSlider(sliderValue: ModelRef<number | TRangeValues>, stepPercentage: number, isVerticalSlider: boolean, direction: string, _leftKnob: Ref<HTMLElement>, _rightKnob: Ref<HTMLElement>, range: boolean, strict: boolean, _moveFrom: Ref<string>): IUseSliderReturn{
     const isReverseSlider: boolean = ['rtl', 'btt'].includes(direction)
 
-    const fill = ref<number>(0)
-    const stepsCompleted = ref<number | number[]>(0)
+    const _fill = ref<number>(0)
+    const _stepsCompleted = ref<number | number[]>(0)
 
     // States for Range Slider only👇🏻
 
-    const min = ref<number>(0)
-    const max = ref<number>(0)
-    const currentMinStep = ref<number>(0)
-    const currentMaxStep = ref<number>(0)
+    const _min = ref<number>(0)
+    const _max = ref<number>(0)
+    const _currentMinStep = ref<number>(0)
+    const _currentMaxStep = ref<number>(0)
 
     // Functions for Range Slider👇🏻
 
     function moveMinKnobTo(fillPercentage: number){
-        currentMinStep.value = calculateStepsCompleted(fillPercentage, stepPercentage)
-        min.value = currentMinStep.value * stepPercentage
-        fill.value = Math.abs(max.value - min.value)
-        stepsCompleted.value = getStepsCompleted(currentMinStep.value, currentMaxStep.value)
+        _currentMinStep.value = calculateStepsCompleted(fillPercentage, stepPercentage)
+        _min.value = _currentMinStep.value * stepPercentage
+        _fill.value = Math.abs(_max.value - _min.value)
+        _stepsCompleted.value = getStepsCompleted(_currentMinStep.value, _currentMaxStep.value)
     }
 
     function moveMaxKnobTo(fillPercentage: number){
-        currentMaxStep.value = calculateStepsCompleted(fillPercentage, stepPercentage)
-        max.value = currentMaxStep.value * stepPercentage
-        fill.value = Math.abs(max.value - min.value)
-        stepsCompleted.value = getStepsCompleted(currentMinStep.value, currentMaxStep.value)
+        _currentMaxStep.value = calculateStepsCompleted(fillPercentage, stepPercentage)
+        _max.value = _currentMaxStep.value * stepPercentage
+        _fill.value = Math.abs(_max.value - _min.value)
+        _stepsCompleted.value = getStepsCompleted(_currentMinStep.value, _currentMaxStep.value)
     }
 
     function slideRangeSliderByClick(fillPercentage: number){
-        if(fillPercentage < min.value) moveMinKnobTo(fillPercentage)
-        else if(fillPercentage > max.value) moveMaxKnobTo(fillPercentage)
-        else if(fillPercentage > min.value && fillPercentage < max.value){
-            const leftDistance = Math.round(fillPercentage) - min.value
-            const rightDistance = max.value - Math.round(fillPercentage)
+        if(fillPercentage < _min.value) moveMinKnobTo(fillPercentage)
+        else if(fillPercentage > _max.value) moveMaxKnobTo(fillPercentage)
+        else if(fillPercentage > _min.value && fillPercentage < _max.value){
+            const leftDistance = Math.round(fillPercentage) - _min.value
+            const rightDistance = _max.value - Math.round(fillPercentage)
             if(rightDistance <= leftDistance) moveMaxKnobTo(fillPercentage)
             else moveMinKnobTo(fillPercentage)
         }
     }
 
     function slideRangeSliderFromRightOrBottom(fillPercentage: number){
-        if(fillPercentage > 99) max.value = TOTAL_SLIDER_PERCENTAGE
-        else if(fillPercentage <= min.value){
-            max.value = min.value
-            currentMaxStep.value = currentMinStep.value
+        if(fillPercentage > 99) _max.value = TOTAL_SLIDER_PERCENTAGE
+        else if(fillPercentage <= _min.value){
+            _max.value = _min.value
+            _currentMaxStep.value = _currentMinStep.value
             if(strict) return
-            triggerEvents<TTriggerEvents>(['mouseup', rightKnob.value], ['mousedown', leftKnob.value])
+            triggerEvents<TTriggerEvents>(['mouseup', _rightKnob.value], ['mousedown', _leftKnob.value])
         }
         else moveMaxKnobTo(fillPercentage)
     }
 
     function slideRangeSliderFromLeftOrTop(fillPercentage: number){
-        if(fillPercentage < 1) min.value = 0
-        else if(fillPercentage >= max.value){
-            min.value = max.value
-            currentMinStep.value = currentMaxStep.value
+        if(fillPercentage < 1) _min.value = 0
+        else if(fillPercentage >= _max.value){
+            _min.value = _max.value
+            _currentMinStep.value = _currentMaxStep.value
             if(strict) return
-            triggerEvents<TTriggerEvents>(['mouseup', leftKnob.value], ['mousedown', rightKnob.value])
+            triggerEvents<TTriggerEvents>(['mouseup', _leftKnob.value], ['mousedown', _rightKnob.value])
         }
         else moveMinKnobTo(fillPercentage)
     }
@@ -74,19 +74,19 @@ export function useSlider(sliderValue: ModelRef<number | TRangeValues>, stepPerc
     }
 
     function slideRangeSlider(fillPercentage: number){
-        getMoveFromFunction(moveFrom.value)(fillPercentage)
+        getMoveFromFunction(_moveFrom.value)(fillPercentage)
     }
 
     // End of functions for Range Slider👆🏻
 
     function slideSlider(fillPercentage: number, fromOnUpdatedHook: boolean=false){
-        stepsCompleted.value = calculateStepsCompleted(fillPercentage, stepPercentage)
-        const fillValue: number = stepsCompleted.value * stepPercentage
-        if(isReverseSlider && !fromOnUpdatedHook) fill.value = TOTAL_SLIDER_PERCENTAGE - fillValue
-        else fill.value = fillValue
+        _stepsCompleted.value = calculateStepsCompleted(fillPercentage, stepPercentage)
+        const fillValue: number = _stepsCompleted.value * stepPercentage
+        if(isReverseSlider && !fromOnUpdatedHook) _fill.value = TOTAL_SLIDER_PERCENTAGE - fillValue
+        else _fill.value = fillValue
     }
 
-    function slide(co_ordinate: number, sliderWrapperDimensions: ISliderWrapperDimensions){
+    function fnSlide(co_ordinate: number, sliderWrapperDimensions: ISliderWrapperDimensions){
         const { top, bottom, left, right, width, height } = sliderWrapperDimensions
         const fillPercentage: number = isVerticalSlider ? getFillPercentage((co_ordinate-top), height) : getFillPercentage((co_ordinate-left), width)
         const returnCondition: boolean = isVerticalSlider ? (co_ordinate<top || co_ordinate>bottom) : (co_ordinate<left || co_ordinate>right)
@@ -96,18 +96,18 @@ export function useSlider(sliderValue: ModelRef<number | TRangeValues>, stepPerc
     }
 
     function __initSlider(){
-        stepsCompleted.value = calculateStepsCompleted(sliderValue.value as number, stepPercentage)
-        fill.value = stepsCompleted.value * stepPercentage
+        _stepsCompleted.value = calculateStepsCompleted(sliderValue.value as number, stepPercentage)
+        _fill.value = _stepsCompleted.value * stepPercentage
     }
 
     function __initRangeSlider(){
         const [minValue, maxValue] = getMinAndMax(...sliderValue.value as TRangeValues, isVerticalSlider)
-        min.value = minValue
-        max.value = maxValue
-        currentMinStep.value = calculateStepsCompleted(min.value, stepPercentage)
-        currentMaxStep.value = calculateStepsCompleted(max.value, stepPercentage)
-        fill.value = Math.abs(max.value - min.value)
-        stepsCompleted.value = getStepsCompleted(currentMinStep.value, currentMaxStep.value)
+        _min.value = minValue
+        _max.value = maxValue
+        _currentMinStep.value = calculateStepsCompleted(_min.value, stepPercentage)
+        _currentMaxStep.value = calculateStepsCompleted(_max.value, stepPercentage)
+        _fill.value = Math.abs(_max.value - _min.value)
+        _stepsCompleted.value = getStepsCompleted(_currentMinStep.value, _currentMaxStep.value)
     }
     if(range) __initRangeSlider()
     else __initSlider()
@@ -122,12 +122,12 @@ export function useSlider(sliderValue: ModelRef<number | TRangeValues>, stepPerc
     })
 
     return {
-        fill,
-        stepsCompleted,
-        min,
-        max,
-        currentMinStep,
-        currentMaxStep,
-        slide
+        _fill,
+        _stepsCompleted,
+        _min,
+        _max,
+        _currentMinStep,
+        _currentMaxStep,
+        fnSlide
     }
 }

@@ -58,32 +58,32 @@ export interface ISliderWrapperDimensions{
 }
 
 export interface IUseSliderReturn{
-    fill: Ref<number>,
-    stepsCompleted: Ref<number | number[]>,
-    min: Ref<number>,
-    max: Ref<number>,
-    currentMinStep: Ref<number>,
-    currentMaxStep: Ref<number>
-    slide: TSlide
+    _fill: Ref<number>,
+    _stepsCompleted: Ref<number | number[]>,
+    _min: Ref<number>,
+    _max: Ref<number>,
+    _currentMinStep: Ref<number>,
+    _currentMaxStep: Ref<number>
+    fnSlide: TSlide
 }
 
 export interface IUseEventHandlersArgs{
     sliderValue: ModelRef<number |TRangeValues>,
-    fill: Ref<number>,
-    stepsCompleted: Ref<number | number[]>,
-    minRange: Ref<number>,
-    maxRange: Ref<number>,
-    currentMinStep: Ref<number>,
-    currentMaxStep: Ref<number>,
-    knobNotPressed: Ref<boolean>,
-    moveFrom: Ref<string>,
-    sliderWrapper: Ref<HTMLElement>,
-    sliderWrapperDimensions: Ref<ISliderWrapperDimensions>,
+    _fill: Ref<number>,
+    _stepsCompleted: Ref<number | number[]>,
+    _minRange: Ref<number>,
+    _maxRange: Ref<number>,
+    _currentMinStep: Ref<number>,
+    _currentMaxStep: Ref<number>,
+    _knobNotPressed: Ref<boolean>,
+    _moveFrom: Ref<string>,
+    _sliderWrapper: Ref<HTMLElement>,
+    _sliderWrapperDimensions: Ref<ISliderWrapperDimensions>,
     range: boolean,
     isVerticalSlider: boolean,
     emit: IEmit,
-    slide: TSlide,
-    changeKnobCursor: TChangeKnobCursor
+    fnSlide: TSlide,
+    fnChangeKnobCursor: TChangeKnobCursor
 }
 
 export interface IStepSliderPayload{
@@ -132,19 +132,26 @@ export interface IUseOnSliderMountedArgs{
     customLeftTooltip: boolean,
     customRightTooltip: boolean,
     isVerticalSlider: boolean,
-    sliderKnob: Ref<HTMLElement>,
-    sliderWrapper: Ref<HTMLElement>,
-    rightTooltipXDistance: Ref<string>,
-    rightTooltipYDistance: Ref<string>,
-    leftTooltipXDistance: Ref<string>,
-    leftTooltipYDistance: Ref<string>,
-    knobXDistance: Ref<string>,
-    knobYDistance: Ref<string>,
+    _sliderKnob: Ref<HTMLElement>,
+    _sliderWrapper: Ref<HTMLElement>,
+    _rightTooltipXDistance: Ref<string>,
+    _rightTooltipYDistance: Ref<string>,
+    _leftTooltipXDistance: Ref<string>,
+    _leftTooltipYDistance: Ref<string>,
+    _knobXDistance: Ref<string>,
+    _knobYDistance: Ref<string>,
 }
 export interface IShades{
     both: TUseColorListReturn,
     light: TUseColorValueReturn,
     dark: TUseColorValueReturn
+}
+
+export interface IUseStepMarkerDimensionsReturn{
+    _stepMarkerHorizontalHeight: Ref<number>,
+    _stepMarkerHorizontalWidth: Ref<number>,
+    _stepMarkerVerticalHeight: Ref<number>,
+    _stepMarkerVerticalWidth: Ref<number>
 }
 
 export type TUseColorListReturn = [Ref<string>, Ref<string>]

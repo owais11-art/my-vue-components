@@ -24,7 +24,7 @@
   function c(v:number){
     val.value = v
   }
-  function handleChange(payload: IPayload){
+  function $handleChange(payload: IPayload){
     // console.log(payload.currentMinStep)
   }
 </script>
@@ -58,7 +58,7 @@
                     step-markers
                     range
                     tooltip
-                    @in-change="handleChange"
+                    @in-change="$handleChange"
                 >
                   <template #customLeftKnob>
                     <div class="custom-knob"></div>

@@ -1,28 +1,29 @@
 import { ref } from "vue"
+import type { IUseStepMarkerDimensionsReturn } from "../interfaces"
 
 function extractNumbers(...args: string[]): number[]{
     return args.map(arg => parseFloat(arg))
 }
 
-export function useStepMarkerDimensions(sliderHorizontalHeight: string, sliderVerticalWidth: string, isVerticalSlider: boolean){
-    const stepMarkerHorizontalHeight = ref<number>(0)
-    const stepMarkerHorizontalWidth = ref<number>(0)
-    const stepMarkerVerticalHeight = ref<number>(0)
-    const stepMarkerVerticalWidth = ref<number>(0)
+export function useStepMarkerDimensions(sliderHorizontalHeight: string, sliderVerticalWidth: string, isVerticalSlider: boolean): IUseStepMarkerDimensionsReturn{
+    const _stepMarkerHorizontalHeight = ref<number>(0)
+    const _stepMarkerHorizontalWidth = ref<number>(0)
+    const _stepMarkerVerticalHeight = ref<number>(0)
+    const _stepMarkerVerticalWidth = ref<number>(0)
     const [ horizontalHeight, verticalWidth ] = extractNumbers(sliderHorizontalHeight, sliderVerticalWidth)
     if(isVerticalSlider){
-        stepMarkerVerticalWidth.value = verticalWidth + 5
-        stepMarkerVerticalHeight.value = 3
+        _stepMarkerVerticalWidth.value = verticalWidth + 5
+        _stepMarkerVerticalHeight.value = 3
     }
     else{
-        stepMarkerHorizontalHeight.value = horizontalHeight + 5
-        stepMarkerHorizontalWidth.value = 3
+        _stepMarkerHorizontalHeight.value = horizontalHeight + 5
+        _stepMarkerHorizontalWidth.value = 3
     }
 
     return {
-        stepMarkerHorizontalHeight,
-        stepMarkerHorizontalWidth,
-        stepMarkerVerticalHeight,
-        stepMarkerVerticalWidth
+        _stepMarkerHorizontalHeight,
+        _stepMarkerHorizontalWidth,
+        _stepMarkerVerticalHeight,
+        _stepMarkerVerticalWidth
     }
 }
