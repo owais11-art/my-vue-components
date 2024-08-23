@@ -1,0 +1,1 @@
+export const getFillPercentage = (pixelAmount: number, totalPixels: number): number => (pixelAmount/totalPixels)*100

@@ -1,0 +1,1 @@
+export const userSelect = (option: string) => document.body.style.userSelect = option

@@ -1,0 +1,38 @@
+*,
+*::after,
+*::before,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul li{
+    list-style-type: none;
+}
+
+a{
+    color: #000000;
+    text-decoration: none;
+}
+
+:root{
+    --bg-color: #34495E;
+    --color: #41B883;
+    --color-light: #41B88330;
+}
+
+html{
+    font-family: sans-serif;
+    font-size: 16px;
+}
+
+body{
+    background-color: var(--bg-color);
+    color: var(--color);
+}

@@ -1,0 +1,1 @@
+export const calculateStepsCompleted: (currentPosition: number, stepPercentage: number) => number = (currentPosition: number, stepPercentage: number): number => Math.round(currentPosition / stepPercentage)
