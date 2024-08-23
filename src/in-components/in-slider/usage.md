@@ -5,6 +5,8 @@ To use this component create a folder in src directory of your project and then 
 
 Download the component folder [HERE](https://download-directory.github.io/?url=https://github.com/owais11-art/my-vue-components/tree/dev/src/in-components/in-slider&filename=in-slider)
 
+Name of Downloaded Folder: `in-slider`
+
 ## Basic Use
 ```html
     <script setup lang="ts">
