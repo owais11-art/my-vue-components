@@ -3,7 +3,7 @@
 ## Download
 To use this component create a folder in src directory of your project and then download the component from the link below and put it inside the folder you created.
 
-Download the component folder [HERE](https://download-directory.github.io/?url=https://github.com/owais11-art/my-vue-components/tree/dev/src/in-components/slider&filename=in-slider)
+Download the component folder [HERE](https://github.com/owais11-art/my-vue-components/tree/dev/src/in-components/in-slider&filename=in-slider)
 
 ## Basic Use
 ```html
