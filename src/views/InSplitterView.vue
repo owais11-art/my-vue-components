@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import InSlider from '@/components/slider/InSlider.vue'
-  import { onUpdated, ref, type Ref } from 'vue'
+  import { ref, type Ref } from 'vue'
   import type {IPayload, TRangeValues } from '@/components/slider/interfaces'
 
   const val = ref<number>(0)
