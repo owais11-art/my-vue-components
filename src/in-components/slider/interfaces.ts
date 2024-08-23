@@ -68,7 +68,7 @@ export interface IUseSliderReturn{
 }
 
 export interface IUseEventHandlersArgs{
-    sliderValue: ModelRef<number |TRangeValues>,
+    _sliderValue: ModelRef<number |TRangeValues>,
     _fill: Ref<number>,
     _stepsCompleted: Ref<number | number[]>,
     _minRange: Ref<number>,

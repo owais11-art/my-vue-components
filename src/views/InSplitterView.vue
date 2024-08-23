@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  import InSlider from '@/components/slider/InSlider.vue'
+  import InSlider from '@/in-components/slider/InSlider.vue'
   import { ref, type Ref } from 'vue'
-  import type {IPayload, TRangeValues } from '@/components/slider/interfaces'
+  import type {IPayload, TRangeValues } from '@/in-components/slider/interfaces'
 
   const val = ref<number>(0)
   const rangeValues: Ref<TRangeValues> = ref([10, 50])

@@ -5,12 +5,12 @@ import { CURSORS, EMPTY_STRING } from "../constants"
 export function useEventHandlers(args: IUseEventHandlersArgs){
     function updateSliderValue(){
         if(!args.range) {
-            args.sliderValue.value = Math.round(args._fill.value)
+            args._sliderValue.value = Math.round(args._fill.value)
             args.emit("in-change", { stepsCompleted: args._stepsCompleted.value })
         }
         else{
-            if(args.isVerticalSlider) args.sliderValue.value = [100 - Math.round(args._maxRange.value), 100 - Math.round(args._minRange.value)]
-            else args.sliderValue.value = [Math.round(args._minRange.value), Math.round(args._maxRange.value)]
+            if(args.isVerticalSlider) args._sliderValue.value = [100 - Math.round(args._maxRange.value), 100 - Math.round(args._minRange.value)]
+            else args._sliderValue.value = [Math.round(args._minRange.value), Math.round(args._maxRange.value)]
             args.emit("in-change", {
                 stepsCompleted: args._stepsCompleted.value,
                 currentMinStep: args._currentMinStep.value,

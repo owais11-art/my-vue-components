@@ -1,4 +1,4 @@
-import { getIndecesToCheckSpacesAt } from "./"
+import { getIndecesToCheckSpacesAt } from "."
 export function formatRGBColor(color: string): string{
     const indices = getIndecesToCheckSpacesAt(color)
     indices.forEach((index: number) => {

@@ -42,8 +42,6 @@
     })
     const emit = defineEmits<IEmit>()
 
-    const sliderValue = defineModel() as ModelRef<number | TRangeValues>
-
     const slots = useSlots()
 
     // Variables👇🏻
@@ -59,6 +57,7 @@
 
     // States👇🏻
 
+    const _sliderValue = defineModel() as ModelRef<number | TRangeValues>
     const _moveFrom = ref<string>("")
     const _sliderKnob = ref()
     const _sliderLeftKnob = ref()
@@ -74,17 +73,17 @@
 
     // Using Composables👇🏻
 
-    const { _fill, _stepsCompleted, _min: _minRange, _max: _maxRange, _currentMinStep, _currentMaxStep, fnSlide } = useSlider(sliderValue, stepPercentage, isVerticalSlider, slideDirection as string, _sliderLeftKnob, _sliderKnob, props.range, props.strict, _moveFrom)
+    const { _fill, _stepsCompleted, _min: _minRange, _max: _maxRange, _currentMinStep, _currentMaxStep, fnSlide } = useSlider(_sliderValue, stepPercentage, isVerticalSlider, slideDirection as string, _sliderLeftKnob, _sliderKnob, props.range, props.strict, _moveFrom)
     const _sliderTrackColor = useColor(...useColorArgsForSliderTrackColor) as TUseColorValueReturn
     const [ _stepMarkLightColor, _stepMarkDarkColor ] = useColor(...useColorArgsForStepMarkerColor) as TUseColorListReturn
     const _sliderFillColor = useColor(...useColorArgsForSliderFillColor, 'dark') as TUseColorValueReturn
     const _sliderKnobColor = useColor(...useColorArgsForSliderKnobColor, 'dark') as TUseColorValueReturn
     const [ _knobCursor, fnChangeKnobCursor ] = useCursor(CURSORS.grab)
     const fnGetCustomKnobName = useCustomKnobName(Boolean(slots.customRightKnob), Boolean(slots.customLeftKnob))
-    const fnGetTooltipValue = useTooltipValue(sliderValue, _minRange, _maxRange, _stepsCompleted, props.min, props.max, props.range, isVerticalSlider)
+    const fnGetTooltipValue = useTooltipValue(_sliderValue, _minRange, _maxRange, _stepsCompleted, props.min, props.max, props.range, isVerticalSlider)
     const { _stepMarkerHorizontalHeight, _stepMarkerHorizontalWidth, _stepMarkerVerticalHeight, _stepMarkerVerticalWidth } = useStepMarkerDimensions(props.sliderHeightHorizontal, props.sliderWidthVertical, isVerticalSlider)
     const { fnHandlePressDown, fnHandlePressUp, fnHandleContainerPressDown, fnHandleClick } = useEventHandlers({
-        sliderValue,
+        _sliderValue,
         _fill,
         _stepsCompleted,
         _minRange,

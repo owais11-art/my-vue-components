@@ -3,7 +3,7 @@ import type { TRangeValues, IUseSliderReturn, ISliderWrapperDimensions, TTrigger
 import { TOTAL_SLIDER_PERCENTAGE } from "../constants"
 import { getFillPercentage, triggerEvents, calculateStepsCompleted, getMinAndMax, getStepsCompleted } from "../helpers"
 
-export function useSlider(sliderValue: ModelRef<number | TRangeValues>, stepPercentage: number, isVerticalSlider: boolean, direction: string, _leftKnob: Ref<HTMLElement>, _rightKnob: Ref<HTMLElement>, range: boolean, strict: boolean, _moveFrom: Ref<string>): IUseSliderReturn{
+export function useSlider(_sliderValue: ModelRef<number | TRangeValues>, stepPercentage: number, isVerticalSlider: boolean, direction: string, _leftKnob: Ref<HTMLElement>, _rightKnob: Ref<HTMLElement>, range: boolean, strict: boolean, _moveFrom: Ref<string>): IUseSliderReturn{
     const isReverseSlider: boolean = ['rtl', 'btt'].includes(direction)
 
     const _fill = ref<number>(0)
@@ -96,12 +96,12 @@ export function useSlider(sliderValue: ModelRef<number | TRangeValues>, stepPerc
     }
 
     function __initSlider(){
-        _stepsCompleted.value = calculateStepsCompleted(sliderValue.value as number, stepPercentage)
+        _stepsCompleted.value = calculateStepsCompleted(_sliderValue.value as number, stepPercentage)
         _fill.value = _stepsCompleted.value * stepPercentage
     }
 
     function __initRangeSlider(){
-        const [minValue, maxValue] = getMinAndMax(...sliderValue.value as TRangeValues, isVerticalSlider)
+        const [minValue, maxValue] = getMinAndMax(..._sliderValue.value as TRangeValues, isVerticalSlider)
         _min.value = minValue
         _max.value = maxValue
         _currentMinStep.value = calculateStepsCompleted(_min.value, stepPercentage)
@@ -113,9 +113,9 @@ export function useSlider(sliderValue: ModelRef<number | TRangeValues>, stepPerc
     else __initSlider()
 
     onUpdated(() => {
-        if(!range) slideSlider(sliderValue.value as number, true)
+        if(!range) slideSlider(_sliderValue.value as number, true)
         else{
-            const [minValue, maxValue] = getMinAndMax(...sliderValue.value as TRangeValues, isVerticalSlider)
+            const [minValue, maxValue] = getMinAndMax(..._sliderValue.value as TRangeValues, isVerticalSlider)
             moveMinKnobTo(minValue)
             moveMaxKnobTo(maxValue)
         }
