@@ -1,10 +1,15 @@
 # Usage of InSlider
 
+## Download
+To use this component create a folder in src directory of your project and then download the component from the link below and put it inside the folder you created.
+
+Download the component folder [HERE](https://download-directory.github.io/?url=https://github.com/owais11-art/my-vue-components/tree/dev/src/in-components/slider&filename=in-slider)
+
 ## Basic Use
 ```html
     <script setup lang="ts">
         import { ref } from 'vue'
-        import { InSlider } from '@/<Folder-Name>/InSlider.vue' // Importing InSlider component.
+        import { InSlider } from '@/<Folder-Name>/in-slider/InSlider.vue' // Importing InSlider component.
 
         const val = ref<number>(0)
     </script>
@@ -330,7 +335,7 @@ type: `boolean`
 ```html
     <script setup lang="ts">
         import { ref } from 'vue'
-        import { InSlider } from '@/<Folder-Name>/InSlider.vue' // Importing InSlider component.
+        import { InSlider } from '@/<Folder-Name>/in-slider/InSlider.vue' // Importing InSlider component.
         const rangeVal = ref([10, 45])
     </script>
     <template>
@@ -378,21 +383,16 @@ For `step slider` the object contains only one property:
 ```html
 <script setup lang="ts">
     import { ref } from 'vue'
-    import { InSlider } from '@/<Folder-Name>/InSlider.vue' // Importing InSlider component.
-
-    type InChangeType = {
-        stepsCompleted: number | number[],
-        currentMinStep?: number,
-        currentMaxStep?: number
-    }
+    import { InSlider } from '@/<Folder-Name>/in-slider/InSlider.vue' // Importing InSlider component.
+    import { IPayload } from '@/<Folder-Name>/in-slider/interfaces' // Importing IPayload interface.
 
     const val = ref<number>(0)
     const rangeVal= ref([10, 45])
 
-    function handleChangeStep(payload: InChangeType){
+    function handleChangeStep(payload: IPayload){
         console.log(payload.stepsCompleted)
     }
-    function handleChangeRange(payload: InChangeType){
+    function handleChangeRange(payload: IPayload){
         console.log(payload.stepsCompleted)
         console.log(payload.currentMinStep)
         console.log(payload.currentMaxStep)
